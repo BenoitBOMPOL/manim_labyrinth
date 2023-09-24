@@ -3,6 +3,7 @@
 
     A maze is a collection of cells
 """
+from math import sqrt
 from random import random as rd
 from cell import Cell
 
@@ -17,13 +18,13 @@ class Maze:
         self.maze_width = width
         self.maze_height = height
         self.matrix : list[list[Cell]] = [[Cell(width * row_id + col_id, []) for col_id in range(width)] for row_id in range(height)]
-
+        
     @staticmethod
     def buildRandomMaze(width: int, height: int):
         random_maze = Maze(width, height)
         for row in random_maze.matrix:
             for cell in row:
-                cell.doors = [rd() < 0.5 for _ in range(4)]
+                cell.doors = [rd() < 0.75 for _ in range(4)]
         return random_maze
 
     def are_connected_neighbors(self, cell1_id: int, cell2_id: int):
